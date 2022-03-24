@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">travel_scheduler</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="not_a_user">Not a user?</string>
+    <string name="register"><u>Register</u></string>
+    <string name="about_us"><u>About us !!!</u></string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="facebook">Facebook</string>
+    <string name="sign_up_differently">Sign up with existing Google account</string>
+    <string name="google">Google</string>
+</resources>
