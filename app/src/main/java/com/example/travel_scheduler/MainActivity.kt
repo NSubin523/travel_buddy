@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import com.example.travel_scheduler.firebase.FirebaseSignIn
+import com.example.travel_scheduler.firebase.FirebaseSignOut
 import com.example.travel_scheduler.register.RegisterActivity
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         FirebaseSignIn(this)
     }
 
+    private val userStatus : FirebaseSignOut by lazy{
+        FirebaseSignOut(applicationContext)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         loginBtn = findViewById(R.id.buttonLogin)
         registerLink = findViewById(R.id.registerText)
+
+        userStatus.checkUserStatus()
 
         loginBtn.setOnClickListener {
             loginFirebase.signIn(emailField.text.toString(),passwordField.text.toString())
