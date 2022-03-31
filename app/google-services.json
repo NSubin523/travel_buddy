@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "207297584442",
+    "project_id": "travel-buddy-fc874",
+    "storage_bucket": "travel-buddy-fc874.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207297584442:android:251d85ee8cfa0775514403",
+        "android_client_info": {
+          "package_name": "com.example.travel_scheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207297584442-cil6mo2argico115ospjo2j5groakn8i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travel_scheduler",
+            "certificate_hash": "58ceb842f6087271f276f26078cc472f2e35e712"
+          }
+        },
+        {
+          "client_id": "207297584442-nd3qjgjkmiqoo6o4tp0efcn6lqr75th7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD51tEQ8YV2Y7YvrBuzuiUrUCFvKsOtf4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207297584442-nd3qjgjkmiqoo6o4tp0efcn6lqr75th7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
