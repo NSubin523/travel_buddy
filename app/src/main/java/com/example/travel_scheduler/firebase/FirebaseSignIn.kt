@@ -5,7 +5,7 @@ import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import com.example.travel_scheduler.view.HomeActivity
+import com.example.travel_scheduler.view.home.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

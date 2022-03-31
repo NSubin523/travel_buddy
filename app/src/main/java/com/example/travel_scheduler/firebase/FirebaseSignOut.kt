@@ -3,7 +3,7 @@ package com.example.travel_scheduler.firebase
 import android.content.Context
 import android.content.Intent
 import com.example.travel_scheduler.MainActivity
-import com.example.travel_scheduler.view.HomeActivity
+import com.example.travel_scheduler.view.home.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class FirebaseSignOut(private val context: Context) {
@@ -21,7 +21,7 @@ class FirebaseSignOut(private val context: Context) {
     fun checkUserStatus(){
         val user = auth.currentUser
         if (user!=null){
-            val goToHome = Intent(context,HomeActivity::class.java)
+            val goToHome = Intent(context, HomeActivity::class.java)
             goToHome.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.applicationContext.startActivity(goToHome)
         }
