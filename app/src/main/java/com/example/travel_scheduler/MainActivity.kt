@@ -7,12 +7,13 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.travel_scheduler.firebase.FirebaseSignIn
 import com.example.travel_scheduler.firebase.FirebaseSignOut
-import com.example.travel_scheduler.register.RegisterActivity
+import com.example.travel_scheduler.view.register.RegisterActivity
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var loginBtn: Button
     lateinit var registerLink: TextView
+
     private val emailField: TextView by lazy{
         findViewById(R.id.setEmailField)
     }

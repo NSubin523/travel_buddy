@@ -13,4 +13,5 @@
     <string name="facebook">Facebook</string>
     <string name="sign_up_differently">Sign up with existing Google account</string>
     <string name="google">Google</string>
+    <string name="explore_more"><u><b>Explore more</b></u></string>
 </resources>

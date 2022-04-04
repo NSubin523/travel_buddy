@@ -1,4 +1,4 @@
-package com.example.travel_scheduler.register
+package com.example.travel_scheduler.view.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

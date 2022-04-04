@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.24537037037037038" />
         <entry key="app/src/main/res/drawable/splash_screen_background.xml" value="0.24537037037037038" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.23233695652173914" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.37760162353515625" />
         <entry key="app/src/main/res/layout/activity_login2.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
