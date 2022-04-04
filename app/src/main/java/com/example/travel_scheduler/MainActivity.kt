@@ -3,11 +3,13 @@ package com.example.travel_scheduler
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.travel_scheduler.firebase.FirebaseSignIn
 import com.example.travel_scheduler.firebase.FirebaseSignOut
 import com.example.travel_scheduler.view.register.RegisterActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         userStatus.checkUserStatus()
 
         loginBtn.setOnClickListener {
+            showLoading()
             loginFirebase.signIn(emailField.text.toString(),passwordField.text.toString())
         }
         registerLink.setOnClickListener{
@@ -49,5 +52,9 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToRegistration(){
         val registerIntent = Intent(this,RegisterActivity::class.java)
         startActivity(registerIntent)
+    }
+
+    private fun showLoading(){
+        loadingLayout.visibility = View.VISIBLE
     }
 }

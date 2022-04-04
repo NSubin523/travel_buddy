@@ -185,7 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="152dp"
-                android:text="Provided by Firebase Cloud Auth Services"
+                android:text="@string/provided_by_firebase_cloud_auth_services"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.556"
                 app:layout_constraintStart_toStartOf="parent"

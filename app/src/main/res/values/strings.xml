@@ -14,4 +14,5 @@
     <string name="sign_up_differently">Sign up with existing Google account</string>
     <string name="google">Google</string>
     <string name="explore_more"><u><b>Explore more</b></u></string>
+    <string name="provided_by_firebase_cloud_auth_services">Provided by Firebase Cloud Auth Services</string>
 </resources>
