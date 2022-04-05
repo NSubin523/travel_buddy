@@ -15,4 +15,9 @@
     <string name="google">Google</string>
     <string name="explore_more"><u><b>Explore more</b></u></string>
     <string name="provided_by_firebase_cloud_auth_services">Provided by Firebase Cloud Auth Services</string>
+    <string name="check_for_destinations">Check for destinations</string>
+    <string name="upcoming_trips">Upcoming Trips</string>
+    <string name="saved_trips">Saved Trips</string>
+    <string name="explore">Explore</string>
+    <string name="destinations">Destinations</string>
 </resources>

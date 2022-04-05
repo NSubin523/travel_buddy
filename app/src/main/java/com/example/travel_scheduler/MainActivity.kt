@@ -5,16 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.travel_scheduler.firebase.FirebaseSignIn
 import com.example.travel_scheduler.firebase.FirebaseSignOut
+import com.example.travel_scheduler.progress_bar.LoadingCircle
 import com.example.travel_scheduler.view.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var loginBtn: Button
-    lateinit var registerLink: TextView
+    private lateinit var registerLink: TextView
+    private val progressBar = LoadingCircle()
 
     private val emailField: TextView by lazy{
         findViewById(R.id.setEmailField)

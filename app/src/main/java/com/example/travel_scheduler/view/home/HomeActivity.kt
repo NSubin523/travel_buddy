@@ -1,8 +1,10 @@
 package com.example.travel_scheduler.view.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -11,6 +13,8 @@ import com.example.travel_scheduler.R
 import com.example.travel_scheduler.firebase.FirebaseSignOut
 import com.example.travel_scheduler.view.home.image_container.adapter.SliderAdapter
 import com.example.travel_scheduler.view.home.image_container.model.SliderItem
+import com.example.travel_scheduler.view.questionnaire.Questionnaire
+
 class HomeActivity : AppCompatActivity() {
 
     //lateinit var signOutBtn: Button
@@ -23,6 +27,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private val sliderHandler = Handler()
+
+    private lateinit var questionnaire : ViewGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +46,13 @@ class HomeActivity : AppCompatActivity() {
 
         compositeTransformerAdders(compositePageTransformer)
         viewPagerSetter(viewPager,compositePageTransformer)
+
+        questionnaire = findViewById(R.id.questionnaire)
+
+        questionnaire.setOnClickListener{
+            val openQuestionnaire = Intent(this,Questionnaire::class.java)
+            startActivity(openQuestionnaire)
+        }
 
 /*        signOutBtn.setOnClickListener{
             logOutFirebase.signOut()
