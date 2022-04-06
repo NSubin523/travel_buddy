@@ -3,13 +3,13 @@ package com.example.travel_scheduler
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
-import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.travel_scheduler.firebase.FirebaseSignIn
 import com.example.travel_scheduler.firebase.FirebaseSignOut
-import com.example.travel_scheduler.progress_bar.LoadingCircle
+import com.example.travel_scheduler.utils.Utils
 import com.example.travel_scheduler.view.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var loginBtn: Button
     private lateinit var registerLink: TextView
-    private val progressBar = LoadingCircle()
 
     private val emailField: TextView by lazy{
         findViewById(R.id.setEmailField)
@@ -44,8 +43,11 @@ class MainActivity : AppCompatActivity() {
         userStatus.checkUserStatus()
 
         loginBtn.setOnClickListener {
-            showLoading()
-            loginFirebase.signIn(emailField.text.toString(),passwordField.text.toString())
+            if(!TextUtils.isEmpty(emailField.text.toString()) || !TextUtils.isEmpty(passwordField.text.toString())){
+                showLoading()
+                loginFirebase.signIn(emailField.text.toString(),passwordField.text.toString())
+                finish()
+            }
         }
         registerLink.setOnClickListener{
             this.navigateToRegistration()
