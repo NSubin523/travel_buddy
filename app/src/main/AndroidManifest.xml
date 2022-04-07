@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Travel_scheduler">
         <activity
+            android:name=".view.questionnaire.results.ResultActivityPage"
+            android:exported="false" />
+        <activity
             android:name=".view.explore.Explore"
             android:exported="false" />
         <activity

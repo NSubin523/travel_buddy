@@ -20,4 +20,24 @@
     <string name="saved_trips">Saved Trips</string>
     <string name="explore">Explore</string>
     <string name="destinations">Destinations</string>
+    <string name="let_us_know">Let us know</string>
+    <string name="where_are_you_travelling">Where are you travelling?</string>
+    <string name="let_us_know_some_stuffs"><u>Let us know some stuffs</u></string>
+    <string name="location">Location</string>
+    <string name="what_are_you_interests">What are you interests?</string>
+    <string name="interests">Interests</string>
+    <string name="select_your_interests_below">Select your interests below</string>
+    <string name="when_are_you_travelling">When are you travelling?</string>
+    <string name="change_date">Change Date</string>
+    <string name="set_date">Set Date</string>
+    <string-array name="interests_array">
+        <item>Hiking</item>
+        <item>Sky Scrapers</item>
+        <item>Museums</item>
+        <item>Water fronts</item>
+        <item>Road trips</item>
+        <item>Kids Activities</item>
+        <item>Colleges</item>
+        <item>Restaurants</item>
+    </string-array>
 </resources>
