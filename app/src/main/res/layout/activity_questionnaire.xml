@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userNameBox"
+        android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/location"
@@ -47,7 +47,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/registerName"
+            android:id="@+id/setLocation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
@@ -67,7 +67,7 @@
         android:text="@string/select_your_interests_below"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameBox" />
+        app:layout_constraintTop_toBottomOf="@+id/location" />
 
     <Spinner
         android:id="@+id/spinner1"

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import com.example.travel_scheduler.R
@@ -24,6 +25,7 @@ class Questionnaire : AppCompatActivity() {
     private var cal: Calendar = Calendar.getInstance()
     private lateinit var floatingActionButton: FloatingActionButton
     private lateinit var handler: Handler
+    private lateinit var setLocation: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,7 @@ class Questionnaire : AppCompatActivity() {
         textviewDate = this.text_view_date_1
         buttonDate = this.button_date_1
         floatingActionButton = findViewById(R.id.floatingActionButton)
+        setLocation = findViewById(R.id.setLocation)
 
         textviewDate!!.text = "--/--/----"
         spinner1 = findViewById(R.id.spinner1)
@@ -44,8 +47,13 @@ class Questionnaire : AppCompatActivity() {
 
         dateSetListener(buttonDate,cal)
         floatingActionButton.setOnClickListener{
-            showLoading()
-            navigateToResults()
+            if(!TextUtils.isEmpty(setLocation.text.toString()) && !TextUtils.isEmpty(textviewDate!!.text.toString())){
+                showLoading()
+                navigateToResults()
+            }
+            else{
+                Toast.makeText(baseContext,"Error: Missing Credentials",Toast.LENGTH_SHORT).show()
+            }
             // Pass spinner 1,2,3 and add selections to intent extrass for next page
         }
     }
