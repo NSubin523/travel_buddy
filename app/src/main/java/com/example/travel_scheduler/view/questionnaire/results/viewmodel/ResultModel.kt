@@ -16,7 +16,7 @@ class ResultModel(
     private val adapter: ResultAdapter,
     private val results: MutableList<YelpResults>) : ViewModel() {
 
-    private fun getDestinations(searchTerm: String, location: String,) {
+    fun getDestinations() {
         NetworkModule.newInstance().service.getDestinations("Bearer ${Utils.API_KEY}",
                                                             "Avocado Toast",
                                                             "New York City",
