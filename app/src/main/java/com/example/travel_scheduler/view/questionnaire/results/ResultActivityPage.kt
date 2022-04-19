@@ -23,6 +23,7 @@ class ResultActivityPage : AppCompatActivity() {
         rvDestinations.layoutManager = LinearLayoutManager(this)
 
         val viewModel = ResultModel(adapter,destinations)
-        viewModel.getDestinations()
+        viewModel.getDestinations(intent.getStringExtra("Activity1").toString(),
+                                  intent.getStringExtra("Location").toString())
     }
 }

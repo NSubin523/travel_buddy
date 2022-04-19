@@ -49,12 +49,12 @@ class Questionnaire : AppCompatActivity() {
         floatingActionButton.setOnClickListener{
             if(!TextUtils.isEmpty(setLocation.text.toString()) && !TextUtils.isEmpty(textviewDate!!.text.toString())){
                 showLoading()
-                navigateToResults()
+                navigateToResults(textviewDate!!.text.toString(),setLocation.text.toString(),
+                                  spinner1,spinner2,spinner3)
             }
             else{
                 Toast.makeText(baseContext,"Error: Missing Credentials",Toast.LENGTH_SHORT).show()
             }
-            // Pass spinner 1,2,3 and add selections to intent extrass for next page
         }
     }
 
@@ -99,10 +99,15 @@ class Questionnaire : AppCompatActivity() {
         textviewDate!!.text = sdf.format(cal.time)
     }
 
-    private fun navigateToResults(){
+    private fun navigateToResults(date: String,location: String,spinner1: Spinner, spinner2: Spinner, spinner3: Spinner){
         handler = Handler()
         handler.postDelayed({
             val travelSchedule = Intent(applicationContext,ResultActivityPage::class.java)
+            travelSchedule.putExtra("Location",location)
+            travelSchedule.putExtra("Activity1",spinner1.selectedItem.toString())
+            travelSchedule.putExtra("Activity2",spinner2.selectedItem.toString())
+            travelSchedule.putExtra("Activity3",spinner3.selectedItem.toString())
+            travelSchedule.putExtra("Date",date)
             startActivity(travelSchedule)
             this.finish()
         },2000)

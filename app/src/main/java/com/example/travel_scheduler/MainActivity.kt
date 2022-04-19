@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         loginBtn.setOnClickListener {
             showLoading()
             loginFirebase.signIn(emailField.text.toString(),passwordField.text.toString())
+            this.finish()
         }
         registerLink.setOnClickListener{
             this.navigateToRegistration()

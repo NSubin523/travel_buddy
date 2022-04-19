@@ -16,10 +16,10 @@ class ResultModel(
     private val adapter: ResultAdapter,
     private val results: MutableList<YelpResults>) : ViewModel() {
 
-    fun getDestinations() {
+    fun getDestinations(searchTerm: String, location: String) {
         NetworkModule.newInstance().service.getDestinations("Bearer ${Utils.API_KEY}",
-                                                            "Avocado Toast",
-                                                            "New York City",
+                                                            searchTerm,
+                                                            location,
                                                             Utils.limit,
                                                             Utils.default_sorting)
             .enqueue(object : Callback<YelpSearchResult> {
