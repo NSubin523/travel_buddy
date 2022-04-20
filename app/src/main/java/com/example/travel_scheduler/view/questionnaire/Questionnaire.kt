@@ -20,12 +20,14 @@ class Questionnaire : AppCompatActivity() {
     private lateinit var spinner1: Spinner
     private lateinit var spinner2: Spinner
     private lateinit var spinner3: Spinner
+    private lateinit var spinner4: Spinner
     private var buttonDate: Button? = null
     private var textviewDate: TextView? = null
     private var cal: Calendar = Calendar.getInstance()
     private lateinit var floatingActionButton: FloatingActionButton
     private lateinit var handler: Handler
     private lateinit var setLocation: TextView
+    private lateinit var setTripName: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,21 +38,26 @@ class Questionnaire : AppCompatActivity() {
         buttonDate = this.button_date_1
         floatingActionButton = findViewById(R.id.floatingActionButton)
         setLocation = findViewById(R.id.setLocation)
+        setTripName = findViewById(R.id.setTripName)
 
         textviewDate!!.text = "--/--/----"
         spinner1 = findViewById(R.id.spinner1)
         spinner2 = findViewById(R.id.spinner2)
         spinner3 = findViewById(R.id.spinner3)
+        spinner4 = findViewById(R.id.spinner4)
         setSpinner(spinner1)
         setSpinner(spinner2)
         setSpinner(spinner3)
+        setSpinner(spinner4)
 
         dateSetListener(buttonDate,cal)
         floatingActionButton.setOnClickListener{
-            if(!TextUtils.isEmpty(setLocation.text.toString()) && !TextUtils.isEmpty(textviewDate!!.text.toString())){
+            if(!TextUtils.isEmpty(setLocation.text.toString())
+                && !TextUtils.isEmpty(textviewDate!!.text.toString())
+                && !TextUtils.isEmpty(setTripName.text.toString())){
                 showLoading()
-                navigateToResults(textviewDate!!.text.toString(),setLocation.text.toString(),
-                                  spinner1,spinner2,spinner3)
+                navigateToResults(setTripName.text.toString(),textviewDate!!.text.toString(),
+                                  setLocation.text.toString(), spinner1,spinner2,spinner3,spinner4)
             }
             else{
                 Toast.makeText(baseContext,"Error: Missing Credentials",Toast.LENGTH_SHORT).show()
@@ -99,14 +106,17 @@ class Questionnaire : AppCompatActivity() {
         textviewDate!!.text = sdf.format(cal.time)
     }
 
-    private fun navigateToResults(date: String,location: String,spinner1: Spinner, spinner2: Spinner, spinner3: Spinner){
+    private fun navigateToResults(tripName: String, date: String,location: String,spinner1: Spinner,
+                                  spinner2: Spinner, spinner3: Spinner, spinner4: Spinner){
         handler = Handler()
         handler.postDelayed({
             val travelSchedule = Intent(applicationContext,ResultActivityPage::class.java)
             travelSchedule.putExtra("Location",location)
+            travelSchedule.putExtra("Name",tripName)
             travelSchedule.putExtra("Activity1",spinner1.selectedItem.toString())
             travelSchedule.putExtra("Activity2",spinner2.selectedItem.toString())
             travelSchedule.putExtra("Activity3",spinner3.selectedItem.toString())
+            travelSchedule.putExtra("Activity4",spinner4.selectedItem.toString())
             travelSchedule.putExtra("Date",date)
             startActivity(travelSchedule)
             this.finish()
