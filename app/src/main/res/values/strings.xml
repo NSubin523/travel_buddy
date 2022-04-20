@@ -30,6 +30,7 @@
     <string name="when_are_you_travelling">When are you travelling?</string>
     <string name="change_date">Change Date</string>
     <string name="set_date">Set Date</string>
+    <string name="call_destination">Call Destination</string>
     <string-array name="interests_array">
         <item>Hiking</item>
         <item>Sky Scrapers</item>

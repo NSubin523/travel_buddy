@@ -5,15 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.questionnaire.results.ResultActivityPage"
-    android:layout_marginTop="100dp"
     >
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDestinations"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/whitesmoke"
+        />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/rvDestinations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/light_purple"
+        android:fillViewport="true"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            >
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                />
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

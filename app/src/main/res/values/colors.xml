@@ -13,4 +13,7 @@
     <color name="holf">#50767676</color>
     <color name="whitesmoke">#F5F5F5</color>
     <color name="abnbRed">#90FF5A5F</color>
+    <color name="purple300">#9370DB</color>
+    <color name="dark">#080808</color>
+    <color name="gray">#939393</color>
 </resources>

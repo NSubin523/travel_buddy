@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -17,7 +18,7 @@ import com.example.travel_scheduler.view.questionnaire.Questionnaire
 
 class HomeActivity : AppCompatActivity() {
 
-    //lateinit var signOutBtn: Button
+    lateinit var signOutBtn: Button
     private val viewPager: ViewPager2 by lazy {
         findViewById(R.id.viewpager_images)
     }
@@ -34,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        //signOutBtn = findViewById(R.id.signOut)
+        signOutBtn = findViewById(R.id.signOut)
 
         setHomeTitleBar()
 
@@ -54,9 +55,10 @@ class HomeActivity : AppCompatActivity() {
             startActivity(openQuestionnaire)
         }
 
-/*        signOutBtn.setOnClickListener{
+        signOutBtn.setOnClickListener{
             logOutFirebase.signOut()
-        }*/
+            this.finish()
+        }
     }
 
     private val sliderRunnable = Runnable{
