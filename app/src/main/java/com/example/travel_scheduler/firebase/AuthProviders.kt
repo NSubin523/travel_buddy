@@ -6,14 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.travel_scheduler.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 
-class AuthProviders: AppCompatActivity() {
+class AuthProviders {
     private lateinit var auth: FirebaseAuth
 
     fun registerUser(activity: Activity,context: Context,userName:String,emailField: String,
@@ -31,7 +30,7 @@ class AuthProviders: AppCompatActivity() {
                             val signInIntent = Intent(context, MainActivity::class.java)
                             signInIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             signInIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                            startActivity(signInIntent)
+                            context.startActivity(signInIntent)
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
