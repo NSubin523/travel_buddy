@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import com.example.travel_scheduler.R
+import com.example.travel_scheduler.firebase.FirestoreProviders
 import com.example.travel_scheduler.view.questionnaire.results.ResultActivityPage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_questionnaire.*
@@ -28,6 +29,7 @@ class Questionnaire : AppCompatActivity() {
     private lateinit var handler: Handler
     private lateinit var setLocation: TextView
     private lateinit var setTripName: TextView
+    private val dbProviders = FirestoreProviders(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +60,7 @@ class Questionnaire : AppCompatActivity() {
                 showLoading()
                 navigateToResults(setTripName.text.toString(),textviewDate!!.text.toString(),
                                   setLocation.text.toString(), spinner1,spinner2,spinner3,spinner4)
+                dbProviders.storeItineraryTitleAndDate(setTripName.text.toString(),textviewDate!!.text.toString())
             }
             else{
                 Toast.makeText(baseContext,"Error: Missing Credentials",Toast.LENGTH_SHORT).show()

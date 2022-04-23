@@ -9,5 +9,8 @@ class UpcomingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upcoming)
         supportActionBar?.title = "Upcoming Trips"
+
+        val list = ArrayList<String>()
+        list.add(intent.getStringExtra("Location").toString())
     }
 }

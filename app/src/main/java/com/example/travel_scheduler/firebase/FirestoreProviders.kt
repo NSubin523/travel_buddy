@@ -34,4 +34,17 @@ class FirestoreProviders(private val context: Context) {
             Toast.makeText(context,"Cannot connect to database 404 !!",Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun storeItineraryTitleAndDate(title: String, date: String){
+        val documentRef = db.collection("itineraryTitle").document(userId!!)
+            .collection("titleList")
+        val store: MutableMap<String,Any> = HashMap()
+        store["title"] = title
+        store["date"] = date
+        documentRef.add(store).addOnSuccessListener {
+            Toast.makeText(context,"Creating itinerary for given date",Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener{
+            Toast.makeText(context,"Could not create Itinerary",Toast.LENGTH_SHORT).show()
+        }
+    }
 }
