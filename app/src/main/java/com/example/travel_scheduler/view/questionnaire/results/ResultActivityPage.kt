@@ -11,18 +11,16 @@ import com.example.travel_scheduler.view.questionnaire.results.viewmodel.ResultM
 import kotlinx.android.synthetic.main.activity_result_page.*
 
 class ResultActivityPage : AppCompatActivity() {
-    private val destinations = mutableListOf<YelpResults>()
-    private val adapter = ResultAdapter(this,destinations)
     private val button1 : Button by lazy{
         findViewById(R.id.button1)
     }
     private val button2 : Button by lazy {
         findViewById(R.id.button2)
     }
-    private val button3 : Button by lazy{
+    private val button3 : Button by lazy {
         findViewById(R.id.button3)
     }
-    private val button4: Button by lazy{
+    private val button4 : Button by lazy {
         findViewById(R.id.button4)
     }
 
@@ -34,23 +32,21 @@ class ResultActivityPage : AppCompatActivity() {
 
         setButtonTitle()
 
-        rvDestinations.adapter = adapter
-        rvDestinations.layoutManager = LinearLayoutManager(this)
-        val viewModel = ResultModel(adapter,destinations)
-        viewModel.getDestinations(intent.getStringExtra("Activity1").toString(),
-                                  intent.getStringExtra("Location").toString())
+        displayBodyOnCall(intent.getStringExtra("Activity1").toString(),intent.getStringExtra("Location").toString())
         button1.setOnClickListener{
-            viewModel.getDestinations(button1.text.toString(),intent.getStringExtra("Location").toString())
+            displayBodyOnCall(button1.text.toString(),intent.getStringExtra("Location").toString())
         }
 
         button2.setOnClickListener{
-            viewModel.getDestinations(button2.text.toString(),intent.getStringExtra("Location").toString())
+            displayBodyOnCall(button2.text.toString(),intent.getStringExtra("Location").toString())
         }
+
         button3.setOnClickListener{
-            viewModel.getDestinations(button3.text.toString(),intent.getStringExtra("Location").toString())
+            displayBodyOnCall(button3.text.toString(),intent.getStringExtra("Location").toString())
         }
+
         button4.setOnClickListener{
-            viewModel.getDestinations(button4.text.toString(),intent.getStringExtra("Location").toString())
+            displayBodyOnCall(button4.text.toString(),intent.getStringExtra("Location").toString())
         }
     }
 
@@ -61,4 +57,12 @@ class ResultActivityPage : AppCompatActivity() {
         button4.text = intent.getStringExtra("Activity4").toString()
     }
 
+    private fun displayBodyOnCall(content: String, location: String){
+        val destination = mutableListOf<YelpResults>()
+        val adapter = ResultAdapter(this,destination,intent)
+        rvDestinations.adapter = adapter
+        rvDestinations.layoutManager = LinearLayoutManager(this)
+        val viewModel = ResultModel(adapter,destination)
+        viewModel.getDestinations(content,location)
+    }
 }

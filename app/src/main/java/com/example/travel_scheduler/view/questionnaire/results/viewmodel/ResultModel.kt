@@ -2,7 +2,6 @@ package com.example.travel_scheduler.view.questionnaire.results.viewmodel
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import com.example.travel_scheduler.utils.Utils
 import com.example.travel_scheduler.view.questionnaire.results.adapter.ResultAdapter
 import com.example.travel_scheduler.view.questionnaire.results.model.data.YelpResults
@@ -14,7 +13,7 @@ import retrofit2.Response
 
 class ResultModel(
     private val adapter: ResultAdapter,
-    private val results: MutableList<YelpResults>) : ViewModel() {
+    private val results: MutableList<YelpResults>) {
 
     fun getDestinations(searchTerm: String, location: String) {
         NetworkModule.newInstance().service.getDestinations("Bearer ${Utils.API_KEY}",

@@ -41,6 +41,8 @@
         <item>Road trips</item>
         <item>Kids Activities</item>
         <item>Colleges</item>
-        <item>Restaurants</item>
+        <item>Restaurants and Deli</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -8,5 +8,6 @@ class UpcomingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upcoming)
+        supportActionBar?.title = "Upcoming Trips"
     }
 }

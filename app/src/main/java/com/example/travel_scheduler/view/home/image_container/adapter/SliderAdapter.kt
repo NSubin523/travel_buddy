@@ -1,5 +1,6 @@
 package com.example.travel_scheduler.view.home.image_container.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class SliderAdapter internal constructor(
         return sliderItems.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private val runnable  = Runnable{
         sliderItems.addAll(sliderItems)
         notifyDataSetChanged()

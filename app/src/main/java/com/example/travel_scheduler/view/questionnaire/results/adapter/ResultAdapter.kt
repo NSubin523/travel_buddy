@@ -1,7 +1,9 @@
 package com.example.travel_scheduler.view.questionnaire.results.adapter
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -13,11 +15,12 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.travel_scheduler.R
+import com.example.travel_scheduler.firebase.FirestoreProviders
 import com.example.travel_scheduler.view.questionnaire.results.model.data.YelpResults
-import kotlinx.android.synthetic.main.activity_questionnaire.view.*
 import kotlinx.android.synthetic.main.single_destination.view.*
 
-class ResultAdapter(private val context: Context, private val destinations: List<YelpResults>) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
+class ResultAdapter(private val context: Context, private val destinations: List<YelpResults>,
+                    private val intent: Intent) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultAdapter.ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.single_destination,parent,false))
     }
@@ -30,16 +33,15 @@ class ResultAdapter(private val context: Context, private val destinations: List
     override fun getItemCount() = destinations.size
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+
+        private val dbAuth = FirestoreProviders(context)
+
         @SuppressLint("SetTextI18n")
         fun bind(destinations: YelpResults){
             itemView.tvName.text = destinations.name
             itemView.tvName.setOnClickListener{
-                val re= Regex("[^A-Za-z]")
-                var rName = destinations.name
-                rName = re.replace(rName,"").lowercase()
-                val url = "https://$rName.com"
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(url)
+                intent.data = Uri.parse(destinations.url)
                 itemView.context.startActivity(intent)
             }
             itemView.ratingBar.rating = destinations.rating.toFloat()
@@ -67,7 +69,14 @@ class ResultAdapter(private val context: Context, private val destinations: List
                 itemView.context.startActivity(dialIntent)
             }
             itemView.addToFavorites.setOnClickListener{
-                //TODO DATABASE STUFFS
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Add").setMessage("Add "+destinations.name+" to itinerary?")
+                    .setNegativeButton("No",null)
+                    .setPositiveButton("Yes") { dialogInterface: DialogInterface, i : Int ->
+                        dbAuth.databaseProviders(destinations,intent.getStringExtra("Name").toString())
+                    }
+                val alert = builder.create()
+                alert.show()
             }
         }
     }

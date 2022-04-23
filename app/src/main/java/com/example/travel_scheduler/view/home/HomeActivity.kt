@@ -1,11 +1,11 @@
 package com.example.travel_scheduler.view.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -15,10 +15,12 @@ import com.example.travel_scheduler.firebase.FirebaseSignOut
 import com.example.travel_scheduler.view.home.image_container.adapter.SliderAdapter
 import com.example.travel_scheduler.view.home.image_container.model.SliderItem
 import com.example.travel_scheduler.view.questionnaire.Questionnaire
+import com.example.travel_scheduler.view.upcoming_trips.UpcomingActivity
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var signOutBtn: Button
+    private lateinit var upcomingTrip: ViewGroup
     private val viewPager: ViewPager2 by lazy {
         findViewById(R.id.viewpager_images)
     }
@@ -49,10 +51,15 @@ class HomeActivity : AppCompatActivity() {
         viewPagerSetter(viewPager,compositePageTransformer)
 
         questionnaire = findViewById(R.id.questionnaire)
+        upcomingTrip = findViewById(R.id.upcomingTrips)
 
         questionnaire.setOnClickListener{
             val openQuestionnaire = Intent(this,Questionnaire::class.java)
             startActivity(openQuestionnaire)
+        }
+
+        upcomingTrip.setOnClickListener{
+            startActivity(Intent(this,UpcomingActivity::class.java))
         }
 
         signOutBtn.setOnClickListener{

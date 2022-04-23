@@ -8,12 +8,14 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.travel_scheduler.firebase.FirebaseSignIn
 import com.example.travel_scheduler.firebase.FirebaseSignOut
+import com.example.travel_scheduler.firebase.GoogleSignUp
 import com.example.travel_scheduler.view.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var loginBtn: Button
+    lateinit var googleSignInBtn: Button
     private lateinit var registerLink: TextView
 
     private val emailField: TextView by lazy{
@@ -29,6 +31,9 @@ class MainActivity : AppCompatActivity() {
     private val userStatus : FirebaseSignOut by lazy{
         FirebaseSignOut(applicationContext)
     }
+    private val googleSignIn : GoogleSignUp by lazy{
+        GoogleSignUp(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         loginBtn = findViewById(R.id.buttonLogin)
         registerLink = findViewById(R.id.registerText)
+        googleSignInBtn = findViewById(R.id.googleSignUp)
 
         userStatus.checkUserStatus()
 
@@ -48,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         registerLink.setOnClickListener{
             this.navigateToRegistration()
         }
+        googleSignInBtn.setOnClickListener{
+            showLoading()
+            googleSignIn.signIn()
+        }
     }
 
     private fun navigateToRegistration(){
@@ -57,5 +67,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoading(){
         loadingLayout.visibility = View.VISIBLE
+    }
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        googleSignIn.onActivityResult(requestCode, resultCode, data)
     }
 }

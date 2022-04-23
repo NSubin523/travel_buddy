@@ -2,7 +2,6 @@ package com.example.travel_scheduler.firebase
 
 import android.app.Activity
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast

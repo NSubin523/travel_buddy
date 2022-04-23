@@ -18,13 +18,7 @@ data class YelpResults(
     val image_url : String,
     val categories: List<YelpCategory>,
     val location: YelpLocation
-) {
-    fun displayDistance(): String{
-        val miles = 0.000621371
-        val distanceInMiles = "%.2f".format(distance*miles)
-        return "$distanceInMiles mi"
-    }
-}
+)
 
 data class YelpCategory(
     val title : String
