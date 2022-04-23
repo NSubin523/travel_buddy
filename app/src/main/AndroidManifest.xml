@@ -21,9 +21,6 @@
             android:name=".view.explore.Explore"
             android:exported="false" />
         <activity
-            android:name=".view.saved_trips.SavedTrips"
-            android:exported="false" />
-        <activity
             android:name=".view.upcoming_trips.UpcomingActivity"
             android:exported="false" />
         <activity
