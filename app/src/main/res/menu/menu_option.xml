@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_itinerary"
+            android:title="@string/view_itinerary"
+            android:icon="@drawable/ic_baseline_keyboard_arrow_right_24"
+            />
+        <item
+            android:id="@+id/nav_cancel"
+            android:title="@string/cancel_trip"
+            android:icon="@drawable/ic_baseline_cancel_24"
+            />
+        <item
+            android:id="@+id/nav_completed"
+            android:title="@string/completed"
+            android:icon="@drawable/ic_baseline_check_24"
+            />
+    </group>
+</menu>

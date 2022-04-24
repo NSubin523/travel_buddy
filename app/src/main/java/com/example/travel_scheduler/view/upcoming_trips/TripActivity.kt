@@ -7,38 +7,36 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_scheduler.R
-import com.example.travel_scheduler.view.upcoming_trips.firebase_adapter.TitleAdapter
-import com.example.travel_scheduler.view.upcoming_trips.model.TitleData
+import com.example.travel_scheduler.view.upcoming_trips.firebase_adapter.TripAdapter
+import com.example.travel_scheduler.view.upcoming_trips.model.TripData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
 
-class UpcomingActivity : AppCompatActivity() {
+class TripActivity : AppCompatActivity() {
 
-    private lateinit var titleRecyclerView: RecyclerView
-    private lateinit var titleList: ArrayList<TitleData>
-    private lateinit var titleAdapter: TitleAdapter
+    private lateinit var tripRecyclerView: RecyclerView
+    private lateinit var tripList: ArrayList<TripData>
+    private lateinit var tripAdapter: TripAdapter
     private lateinit var dbProvider: FirebaseFirestore
     private val userId = FirebaseAuth.getInstance().currentUser?.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_upcoming)
-        supportActionBar?.title = "Upcoming Trips"
+        setContentView(R.layout.activity_trip)
 
-        titleRecyclerView = findViewById(R.id.rvTripTitle)
-        titleRecyclerView.layoutManager = LinearLayoutManager(this)
-        titleRecyclerView.setHasFixedSize(true)
-        titleList = arrayListOf()
-        titleAdapter = TitleAdapter(titleList,this)
-        titleRecyclerView.adapter = titleAdapter
+        tripRecyclerView = findViewById(R.id.upcomingTripRv)
+        tripRecyclerView.layoutManager = LinearLayoutManager(this)
+        tripRecyclerView.setHasFixedSize(true)
+        tripList = arrayListOf()
+        tripAdapter = TripAdapter(this,tripList)
+        tripRecyclerView.adapter = tripAdapter
         eventChangeListener()
-
     }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun eventChangeListener(){
         dbProvider = FirebaseFirestore.getInstance()
-        dbProvider.collection("itineraryTitle").document(userId!!).collection("titleList")
+        dbProvider.collection("userItinerary").document(userId!!).collection(intent.getStringExtra("Title").toString())
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Log.i("Firestore Error", error.message.toString())
@@ -46,10 +44,10 @@ class UpcomingActivity : AppCompatActivity() {
 
                 for (doc: DocumentChange in value?.documentChanges!!) {
                     if (doc.type == DocumentChange.Type.ADDED) {
-                        titleList.add((doc.document.toObject(TitleData::class.java)))
+                        tripList.add((doc.document.toObject(TripData::class.java)))
                     }
                 }
-                titleAdapter.notifyDataSetChanged()
+                tripAdapter.notifyDataSetChanged()
             }
     }
 }

@@ -1,8 +1,13 @@
 package com.example.travel_scheduler.view.home
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +17,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.travel_scheduler.R
 import com.example.travel_scheduler.firebase.FirebaseSignOut
+import com.example.travel_scheduler.view.explore.Explore
 import com.example.travel_scheduler.view.home.image_container.adapter.SliderAdapter
 import com.example.travel_scheduler.view.home.image_container.model.SliderItem
 import com.example.travel_scheduler.view.questionnaire.Questionnaire
@@ -19,7 +25,6 @@ import com.example.travel_scheduler.view.upcoming_trips.UpcomingActivity
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var signOutBtn: Button
     private lateinit var upcomingTrip: ViewGroup
     private val viewPager: ViewPager2 by lazy {
         findViewById(R.id.viewpager_images)
@@ -32,14 +37,13 @@ class HomeActivity : AppCompatActivity() {
     private val sliderHandler = Handler()
 
     private lateinit var questionnaire : ViewGroup
+    private lateinit var exploreBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        signOutBtn = findViewById(R.id.signOut)
-
-        setHomeTitleBar()
+        supportActionBar?.title="Home"
 
         val sliderItems: MutableList<SliderItem> = ArrayList()
         setImages(sliderItems)
@@ -62,18 +66,47 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this,UpcomingActivity::class.java))
         }
 
-        signOutBtn.setOnClickListener{
-            logOutFirebase.signOut()
-            this.finish()
+        exploreBtn = findViewById(R.id.explore)
+        exploreBtn.setOnClickListener{
+            startActivity(Intent(this,Explore::class.java))
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.actionbar_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.user_fav ->{
+                true
+            }
+            R.id.about_us ->{
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://github.com/NSubin523/travel_buddy")
+                startActivity(intent)
+                true
+            }
+            R.id.sign_out_menu_option->{
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Log Out").setMessage("Do you want to log out?")
+                    .setNegativeButton("No",null)
+                    .setPositiveButton("Yes") { dialogInterface: DialogInterface, i : Int ->
+                        logOutFirebase.signOut()
+                        this.finishActivity(1)
+                    }
+                val alert = builder.create()
+                alert.show()
+                true
+            }
+            else -> false
         }
     }
 
     private val sliderRunnable = Runnable{
         viewPager.currentItem = viewPager.currentItem + 1
-    }
-
-    private fun setHomeTitleBar(){
-        supportActionBar?.title = "Home"
     }
 
     private fun setImages(sliderItems: MutableList<SliderItem> = ArrayList()){

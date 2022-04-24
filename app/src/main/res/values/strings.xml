@@ -45,4 +45,10 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_itinerary">View Itinerary</string>
+    <string name="cancel_trip">Cancel Trip</string>
+    <string name="completed">Completed</string>
+    <string name="favorites">Favorites</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="explore_places_near_you">Explore Places near you</string>
 </resources>

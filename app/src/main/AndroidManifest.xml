@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".view.upcoming_trips.TripActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.questionnaire.results.ResultActivityPage"
             android:exported="false" />
         <activity
