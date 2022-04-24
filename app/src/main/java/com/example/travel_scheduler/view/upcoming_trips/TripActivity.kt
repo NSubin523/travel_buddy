@@ -24,6 +24,7 @@ class TripActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trip)
+        supportActionBar?.title = intent.getStringExtra("Title").toString()
 
         tripRecyclerView = findViewById(R.id.upcomingTripRv)
         tripRecyclerView.layoutManager = LinearLayoutManager(this)

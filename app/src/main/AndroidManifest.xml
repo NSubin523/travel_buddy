@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".view.user_favorites.UserFavorites"
+            android:exported="false" />
+        <activity
             android:name=".view.upcoming_trips.TripActivity"
             android:exported="false" />
         <activity

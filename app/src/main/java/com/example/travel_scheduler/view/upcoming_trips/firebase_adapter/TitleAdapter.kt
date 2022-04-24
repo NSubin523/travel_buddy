@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_scheduler.R
+import com.example.travel_scheduler.firebase.FirestoreProviders
 import com.example.travel_scheduler.popup.IconPopupProvider
 import com.example.travel_scheduler.view.upcoming_trips.TripActivity
 import com.example.travel_scheduler.view.upcoming_trips.model.TitleData
@@ -21,6 +22,7 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
                     private val context: Context): RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
 
     private lateinit var iconProvider: IconPopupProvider
+    private lateinit var dbProviders: FirestoreProviders
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_title,parent,false)
@@ -43,6 +45,8 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
                          true
                      }
                      R.id.nav_cancel ->{
+                         dbProviders = FirestoreProviders(context)
+                         dbProviders.deleteDocument("Summer 2022")
                          true
                      }
                      R.id.nav_completed ->{
