@@ -40,6 +40,11 @@ class TripAdapter(private val context: Context, private val tripList: ArrayList<
             RequestOptions().transforms(
                 CenterCrop(), RoundedCorners(20)
             )).into(holder.image)
+        holder.image.setOnClickListener{
+            val u = Uri.parse("http://maps.google.co.in/maps?q=" + tripObject.name)
+            val intent = Intent(Intent.ACTION_VIEW,u)
+            context.startActivity(intent)
+        }
         holder.ratingBar.rating = tripObject.rating!!
         holder.numReviews.text = "${tripObject.review_count.toString()} reviews"
         holder.addressBar.text = tripObject.address

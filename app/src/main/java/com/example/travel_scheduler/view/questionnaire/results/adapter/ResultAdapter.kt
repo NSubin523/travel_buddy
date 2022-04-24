@@ -62,6 +62,11 @@ class ResultAdapter(private val context: Context, private val destinations: List
                 RequestOptions().transforms(
                 CenterCrop(), RoundedCorners(20)
             )).into(itemView.imageView)
+            itemView.imageView.setOnClickListener{
+                val u = Uri.parse("http://maps.google.co.in/maps?q=" + destinations.name)
+                val intent = Intent(Intent.ACTION_VIEW,u)
+                itemView.context.startActivity(intent)
+            }
 
             itemView.callPhone.setOnClickListener{
                 val dialIntent = Intent(Intent.ACTION_DIAL)
