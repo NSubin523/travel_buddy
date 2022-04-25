@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_scheduler.R
 import com.example.travel_scheduler.firebase.FirestoreProviders
 import com.example.travel_scheduler.popup.IconPopupProvider
+import com.example.travel_scheduler.utils.Utils
 import com.example.travel_scheduler.view.upcoming_trips.TripActivity
 import com.example.travel_scheduler.view.upcoming_trips.model.TitleData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,7 +30,7 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
         return ViewHolder(itemView)
     }
 
-    @SuppressLint("DiscouragedPrivateApi")
+    @SuppressLint("DiscouragedPrivateApi", "NotifyDataSetChanged")
     override fun onBindViewHolder(holder: TitleAdapter.ViewHolder, position: Int) {
          val titleObject : TitleData = titleList[position]
          holder.title.text = titleObject.title
@@ -46,10 +47,13 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
                      }
                      R.id.nav_cancel ->{
                          dbProviders = FirestoreProviders(context)
-                         dbProviders.deleteDocument("Summer 2022")
+                         dbProviders.deleteDocument(titleObject.title.toString(),
+                                    Utils.itineraryTitle,Utils.titleList)
+                         notifyDataSetChanged()
                          true
                      }
                      R.id.nav_completed ->{
+                         holder.completed.visibility = View.VISIBLE
                          true
                      }
                      else -> false
@@ -75,5 +79,6 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
         val title : TextView = itemView.findViewById(R.id.itemTitle)
         val date : TextView = itemView.findViewById(R.id.itemDate)
         val menuButton: FloatingActionButton = itemView.findViewById(R.id.menuOption)
+        val completed: FloatingActionButton = itemView.findViewById(R.id.completed_trip)
     }
 }

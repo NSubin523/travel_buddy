@@ -9,4 +9,7 @@ object Utils {
     val API_KEY = "Ae8wUUA_onNAsTO6JHMOi8v21fpSZsTTNqd75ZdbYtMnxtiBJBSXEQgoKb060bZV2yo51HiyKpSDJHdNUcQL0tiTEXuW1QJr5zOKSDgsL26bd_ui5pXjUaSeIXlOYHYx"
     val limit = 40
     val default_sorting = "rating"
+    val itineraryTitle = "itineraryTitle"
+    val titleList = "titleList"
+    val userItinerary = "userItinerary"
 }

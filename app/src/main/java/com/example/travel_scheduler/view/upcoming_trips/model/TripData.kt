@@ -10,5 +10,6 @@ data class TripData(
     var rating: Float? = null,
     var review_count: Int? = null,
     var status: String? = null,
-    var url: String? = null
+    var url: String? = null,
+    var documentId: String? = null
 )
