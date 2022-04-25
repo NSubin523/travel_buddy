@@ -1,7 +1,9 @@
 package com.example.travel_scheduler.view.upcoming_trips.firebase_adapter
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -47,9 +49,16 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
                      }
                      R.id.nav_cancel ->{
                          dbProviders = FirestoreProviders(context)
-                         dbProviders.deleteDocument(titleObject.title.toString(),
-                                    Utils.itineraryTitle,Utils.titleList)
-                         notifyDataSetChanged()
+                         val builder = AlertDialog.Builder(context)
+                         builder.setTitle("Cancel").setMessage("Cancel this itinerary?")
+                             .setNegativeButton("No",null)
+                             .setPositiveButton("Yes") { dialogInterface: DialogInterface, i : Int ->
+                                 dbProviders.deleteDocument(titleObject.title.toString(),
+                                     Utils.itineraryTitle,Utils.titleList)
+                                 notifyDataSetChanged()
+                             }
+                         val alert = builder.create()
+                         alert.show()
                          true
                      }
                      R.id.nav_completed ->{
