@@ -56,7 +56,8 @@ class FirestoreProviders(private val context: Context) {
         }
     }
 
-    fun deleteDocument(reference: String, collectionPathInitial: String, collectionPathSecondary: String) {
+    fun deleteDocument(reference: String, collectionPathInitial: String, collectionPathSecondary: String,
+                       status: String) {
         db.collection(collectionPathInitial).document(userId!!).collection(collectionPathSecondary)
             .whereEqualTo("title",reference).get()
             .addOnSuccessListener { q ->
@@ -66,12 +67,24 @@ class FirestoreProviders(private val context: Context) {
                     batch.delete(snap.reference)
                 }
                 batch.commit().addOnSuccessListener {
-                    Toast.makeText(context,"Deleted !!",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,status,Toast.LENGTH_SHORT).show()
                 }
                     .addOnFailureListener{e->
                         Toast.makeText(context,"Error deleting",Toast.LENGTH_SHORT).show()
                         Log.e("Firestore error",e.message.toString())
                     }
+            }
+    }
+    fun flagCompletedTrip(title: String, date: String){
+        val docRef = db.collection("completedTrips").document(userId!!).collection("completedTrips")
+        val store : MutableMap<String,Any> = HashMap()
+        store["title"] = title
+        store["date"] = date
+        docRef.add(store).addOnSuccessListener {
+            Log.i("Success",it.toString())
+        }
+            .addOnFailureListener{
+                Log.e("Firestore error",it.message.toString())
             }
     }
 }

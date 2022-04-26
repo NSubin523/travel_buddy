@@ -12,4 +12,6 @@ object Utils {
     val itineraryTitle = "itineraryTitle"
     val titleList = "titleList"
     val userItinerary = "userItinerary"
+    val completed = "Completed!!"
+    val deleted = "Deleted!!"
 }

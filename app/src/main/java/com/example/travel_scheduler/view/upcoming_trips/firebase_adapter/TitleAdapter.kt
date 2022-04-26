@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
 
     private lateinit var iconProvider: IconPopupProvider
     private lateinit var dbProviders: FirestoreProviders
+    private lateinit var handler: Handler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_title,parent,false)
@@ -54,7 +56,7 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
                              .setNegativeButton("No",null)
                              .setPositiveButton("Yes") { dialogInterface: DialogInterface, i : Int ->
                                  dbProviders.deleteDocument(titleObject.title.toString(),
-                                     Utils.itineraryTitle,Utils.titleList)
+                                     Utils.itineraryTitle,Utils.titleList,Utils.deleted)
                                  notifyDataSetChanged()
                              }
                          val alert = builder.create()
@@ -62,7 +64,24 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
                          true
                      }
                      R.id.nav_completed ->{
+                         dbProviders = FirestoreProviders(context)
+                         handler = Handler()
+                         val time : Long = 2000
+                         var flag = false
                          holder.completed.visibility = View.VISIBLE
+                         if (holder.completed.visibility == View.VISIBLE){
+                             flag = true
+                         }
+                         if (flag){
+                             dbProviders.flagCompletedTrip(titleObject.title.toString(),
+                                                        titleObject.date.toString())
+                         }
+                         handler.postDelayed({
+                             holder.titleContainer.visibility = View.GONE
+                             dbProviders.deleteDocument(titleObject.title.toString(),
+                                 Utils.itineraryTitle,Utils.titleList,Utils.completed)
+                             notifyDataSetChanged()
+                         },time)
                          true
                      }
                      else -> false
@@ -89,5 +108,6 @@ class TitleAdapter(private val titleList: ArrayList<TitleData>,
         val date : TextView = itemView.findViewById(R.id.itemDate)
         val menuButton: FloatingActionButton = itemView.findViewById(R.id.menuOption)
         val completed: FloatingActionButton = itemView.findViewById(R.id.completed_trip)
+        val titleContainer: ViewGroup = itemView.findViewById(R.id.title_container)
     }
 }

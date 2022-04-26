@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="true"
         android:clickable="true"
+        android:maxLength="15"
         />
 
     <ImageView
@@ -93,6 +94,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvName"
         android:textColor="@color/purple300"
+        android:ellipsize="end"
+        android:maxLength="13"
         />
 
 

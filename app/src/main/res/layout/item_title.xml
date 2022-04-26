@@ -8,6 +8,7 @@
     android:layout_margin="10dp"
     android:elevation="8dp"
     android:background="@drawable/rounded_edit_text"
+    android:id="@+id/title_container"
     >
 
     <TextView
