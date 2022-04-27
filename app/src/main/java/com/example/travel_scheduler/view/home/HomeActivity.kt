@@ -22,6 +22,7 @@ import com.example.travel_scheduler.view.home.image_container.adapter.SliderAdap
 import com.example.travel_scheduler.view.home.image_container.model.SliderItem
 import com.example.travel_scheduler.view.questionnaire.Questionnaire
 import com.example.travel_scheduler.view.upcoming_trips.UpcomingActivity
+import com.example.travel_scheduler.view.user_history.UserHistory
 
 class HomeActivity : AppCompatActivity() {
 
@@ -80,7 +81,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            R.id.user_fav ->{
+            R.id.completed_trips_user ->{
+                val intent = Intent(this,UserHistory::class.java)
+                startActivity(intent)
                 true
             }
             R.id.about_us ->{

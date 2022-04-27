@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.user_history.UserFavorites">
+    tools:context=".view.user_history.UserHistory">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userFavoritesRV"
+        android:id="@+id/userHistory"
         android:layout_width="409dp"
         android:layout_height="729dp"
         app:layout_constraintStart_toStartOf="parent"

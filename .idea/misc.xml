@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_trip.xml" value="0.2874873353596758" />
         <entry key="app/src/main/res/layout/activity_upcoming.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_user_favorites.xml" value="0.2874873353596758" />
+        <entry key="app/src/main/res/layout/activity_user_history.xml" value="0.2874873353596758" />
         <entry key="app/src/main/res/layout/fragment_1.xml" value="0.39266304347826086" />
         <entry key="app/src/main/res/layout/fragment_2.xml" value="0.39266304347826086" />
         <entry key="app/src/main/res/layout/fragment_3.xml" value="0.39266304347826086" />
@@ -29,6 +30,7 @@
         <entry key="app/src/main/res/layout/slide_image_container.xml" value="0.18885869565217392" />
         <entry key="app/src/main/res/layout/splash_screen_background.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/menu/actionbar_menu.xml" value="0.5911458333333334" />
+        <entry key="app/src/main/res/menu/complted_trip_menu.xml" value="0.5911458333333334" />
         <entry key="app/src/main/res/menu/menu_option.xml" value="0.5" />
       </map>
     </option>
