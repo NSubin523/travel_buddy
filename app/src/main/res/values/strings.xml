@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">travel_scheduler</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -33,6 +32,7 @@
     <string name="call_destination">Call Destination</string>
     <string name="name_your_trip">Name your trip</string>
     <string name="trip_name">Trip Name</string>
+    <string name="app_name">Travel Buddy</string>
     <string-array name="interests_array">
         <item>Hiking</item>
         <item>Observatories</item>
