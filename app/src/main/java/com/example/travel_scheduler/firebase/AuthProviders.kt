@@ -49,7 +49,7 @@ class AuthProviders {
         }
     }
 
-    private fun checkValidations(userName:String, emailField:String, pwField:String, confirmPwField: String): Boolean{
+     fun checkValidations(userName:String, emailField:String, pwField:String, confirmPwField: String): Boolean{
         if(userName.isEmpty() && userName.length>10 && emailField.isEmpty() && pwField.isEmpty() && pwField.length<6
             && pwField.length>12 && confirmPwField != pwField)
             return false

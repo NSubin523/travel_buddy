@@ -4,15 +4,9 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.example.travel_scheduler.view.questionnaire.results.model.data.YelpResults
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
-import java.lang.Exception
 
 class FirestoreProviders(private val context: Context) {
     private val db = FirebaseFirestore.getInstance()

@@ -48,7 +48,7 @@ class GoogleSignUp(private val activity: Activity) {
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
+    fun firebaseAuthWithGoogle(idToken: String) {
         auth = Firebase.auth
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
