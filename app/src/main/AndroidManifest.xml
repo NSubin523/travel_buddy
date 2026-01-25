@@ -47,7 +47,7 @@
         <activity
             android:name=".splash.SplashScreen"
             android:exported="true"
-            android:theme="@style/SplashScreenBackground">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

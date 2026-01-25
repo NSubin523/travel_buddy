@@ -9,23 +9,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import com.example.travel_scheduler.R
+import com.example.travel_scheduler.common.utils.colors.Theme
+import com.example.travel_scheduler.common.utils.dimen.Dimensions
+import com.example.travel_scheduler.common.utils.strings.AppStrings
 
 @Composable
 fun SplashContent(onTimeout: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()
-            .background(Color.White),
+            .background(Theme.BASE_APP_WHITE),
         contentAlignment = Alignment.Center
     ) {
         Image(
             painter = painterResource(id = R.drawable.plane),
-            contentDescription = "Splash Logo",
-            modifier = Modifier.size(500.dp)
+            contentDescription = AppStrings.SPLASH_CONTENT_DESC,
+            modifier = Modifier.size(Dimensions.SPLASH_IMAGE_SIZE)
         )
     }
 
