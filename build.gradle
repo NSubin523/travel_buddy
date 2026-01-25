@@ -1,19 +1,17 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.4"
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21'
-        classpath 'com.google.gms:google-services:4.3.10'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // AGP 8.2.2 is stable and works great with Gradle 8.5 + Java 21
+        classpath "com.android.tools.build:gradle:8.2.2"
+        // Kotlin 1.9.22 is required for newer AGP and Java 21 support
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
+        // Updated Google Services for compatibility
+        classpath 'com.google.gms:google-services:4.4.0'
     }
 }
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir

@@ -5,97 +5,87 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import com.example.travel_scheduler.R
+import com.example.travel_scheduler.databinding.ActivityQuestionnaireBinding
 import com.example.travel_scheduler.firebase.FirestoreProviders
 import com.example.travel_scheduler.view.questionnaire.results.ResultActivityPage
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_questionnaire.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class Questionnaire : AppCompatActivity() {
 
-    private lateinit var spinner1: Spinner
-    private lateinit var spinner2: Spinner
-    private lateinit var spinner3: Spinner
-    private lateinit var spinner4: Spinner
-    private var buttonDate: Button? = null
-    private var textviewDate: TextView? = null
+    // 1. Initialize Binding
+    private lateinit var binding: ActivityQuestionnaireBinding
+
     private var cal: Calendar = Calendar.getInstance()
-    private lateinit var floatingActionButton: FloatingActionButton
-    private lateinit var handler: Handler
-    private lateinit var setLocation: TextView
-    private lateinit var setTripName: TextView
     private val dbProviders = FirestoreProviders(this)
+
+    // Using Looper.getMainLooper() is required in modern Android for Handlers
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_questionnaire)
+
+        // 2. Setup View Binding
+        binding = ActivityQuestionnaireBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         supportActionBar?.hide()
 
-        textviewDate = this.text_view_date_1
-        buttonDate = this.button_date_1
-        floatingActionButton = findViewById(R.id.floatingActionButton)
-        setLocation = findViewById(R.id.setLocation)
-        setTripName = findViewById(R.id.setTripName)
+        // 3. Replace direct synthetic assignments
+        // Old: textviewDate = this.text_view_date_1
+        binding.textViewDate1.text = "--/--/----"
 
-        textviewDate!!.text = "--/--/----"
-        spinner1 = findViewById(R.id.spinner1)
-        spinner2 = findViewById(R.id.spinner2)
-        spinner3 = findViewById(R.id.spinner3)
-        spinner4 = findViewById(R.id.spinner4)
-        setSpinner(spinner1)
-        setSpinner(spinner2)
-        setSpinner(spinner3)
-        setSpinner(spinner4)
+        // Setup Spinners
+        setSpinner(binding.spinner1)
+        setSpinner(binding.spinner2)
+        setSpinner(binding.spinner3)
+        setSpinner(binding.spinner4)
 
-        dateSetListener(buttonDate,cal)
-        floatingActionButton.setOnClickListener{
-            if(!TextUtils.isEmpty(setLocation.text.toString())
-                && !TextUtils.isEmpty(textviewDate!!.text.toString())
-                && !TextUtils.isEmpty(setTripName.text.toString())){
+        dateSetListener(binding.buttonDate1, cal)
+
+        binding.floatingActionButton.setOnClickListener {
+            val location = binding.setLocation.text.toString()
+            val date = binding.textViewDate1.text.toString()
+            val tripName = binding.setTripName.text.toString()
+
+            if (!TextUtils.isEmpty(location) && date != "--/--/----" && !TextUtils.isEmpty(tripName)) {
                 showLoading()
-                navigateToResults(setTripName.text.toString(),textviewDate!!.text.toString(),
-                                  setLocation.text.toString(), spinner1,spinner2,spinner3,spinner4)
-                dbProviders.storeItineraryTitleAndDate(setTripName.text.toString(),textviewDate!!.text.toString())
-            }
-            else{
-                Toast.makeText(baseContext,"Error: Missing Credentials",Toast.LENGTH_SHORT).show()
+                navigateToResults(tripName, date, location)
+                dbProviders.storeItineraryTitleAndDate(tripName, date)
+            } else {
+                Toast.makeText(baseContext, "Error: Missing Credentials", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun setSpinner(spinner: Spinner){
+    private fun setSpinner(spinner: Spinner) {
         ArrayAdapter.createFromResource(
             this,
             R.array.interests_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
     }
 
-    private fun dateSetListener(buttonDate: Button?, cal: Calendar){
-        val dateSetListener =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                cal.set(Calendar.YEAR, year)
-                cal.set(Calendar.MONTH, monthOfYear)
-                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateInView()
-            }
+    private fun dateSetListener(buttonDate: Button, cal: Calendar) {
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDateInView()
+        }
 
-        // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
-        buttonDate!!.setOnClickListener {
+        buttonDate.setOnClickListener {
             DatePickerDialog(
                 this,
                 dateSetListener,
-                // set DatePickerDialog to point to today's date when it loads up
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
@@ -104,29 +94,29 @@ class Questionnaire : AppCompatActivity() {
     }
 
     private fun updateDateInView() {
-        val myFormat = "MM/dd/yyyy" // mention the format you need
+        val myFormat = "MM/dd/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        textviewDate!!.text = sdf.format(cal.time)
+        binding.textViewDate1.text = sdf.format(cal.time)
     }
 
-    private fun navigateToResults(tripName: String, date: String,location: String,spinner1: Spinner,
-                                  spinner2: Spinner, spinner3: Spinner, spinner4: Spinner){
-        handler = Handler()
+    private fun navigateToResults(tripName: String, date: String, location: String) {
         handler.postDelayed({
-            val travelSchedule = Intent(applicationContext,ResultActivityPage::class.java)
-            travelSchedule.putExtra("Location",location)
-            travelSchedule.putExtra("Name",tripName)
-            travelSchedule.putExtra("Activity1",spinner1.selectedItem.toString())
-            travelSchedule.putExtra("Activity2",spinner2.selectedItem.toString())
-            travelSchedule.putExtra("Activity3",spinner3.selectedItem.toString())
-            travelSchedule.putExtra("Activity4",spinner4.selectedItem.toString())
-            travelSchedule.putExtra("Date",date)
+            val travelSchedule = Intent(applicationContext, ResultActivityPage::class.java).apply {
+                putExtra("Location", location)
+                putExtra("Name", tripName)
+                putExtra("Activity1", binding.spinner1.selectedItem.toString())
+                putExtra("Activity2", binding.spinner2.selectedItem.toString())
+                putExtra("Activity3", binding.spinner3.selectedItem.toString())
+                putExtra("Activity4", binding.spinner4.selectedItem.toString())
+                putExtra("Date", date)
+            }
             startActivity(travelSchedule)
             this.finish()
-        },2000)
+        }, 2000)
     }
 
-    private fun showLoading(){
-        load.visibility = View.VISIBLE
+    private fun showLoading() {
+        // Fixes: Unresolved reference: load
+        binding.load.visibility = View.VISIBLE
     }
 }
